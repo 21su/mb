@@ -16,22 +16,22 @@ public class MemberEntity {
     @Column(name = "member_id")
     private Long id;
 
-    @Column(name = "memberId",length = 50, unique = true)
+    @Column(length = 50, unique = true)
     private String memberId;
 
-    @Column(name = "memberPassword", length = 50, nullable = false)
+    @Column(length = 50, nullable = false)
     private String memberPassword;
 
-    @Column(name = "memberName", length = 50, nullable = false)
+    @Column(length = 50, nullable = false)
     private String memberName;
 
-    @Column(name = "memberEmail", length = 50, nullable = false)
+    @Column(length = 50, nullable = false)
     private String memberEmail;
 
-    @Column(name = "memberMobile", length = 50, nullable = false)
+    @Column(length = 50, nullable = false)
     private String memberMobile;
 
-    @Column(name = "memberProfileName", length = 100)
+    @Column(length = 100)
     private String memberProfileName;
 
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

@@ -17,17 +17,17 @@ public class BoardEntity extends BaseEntity{
     @Column(name = "board_id")
     private Long id;
 
-    @Column(name = "boardTitle",length = 50, nullable = false)
+    @Column(length = 50, nullable = false)
     private String boardTitle;
 
-    @Column(name = "boardContents", length = 50, nullable = false)
+    @Column(length = 50, nullable = false)
     private String boardContents;
 
-    @Column(name = "boardHits")
+    @Column
     @ColumnDefault("0")
     private int boardHits;
 
-    @Column(name = "boardFileName")
+    @Column
     private String boardFileName;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -14,7 +14,7 @@ public class CommentEntity extends BaseEntity{
     @Column(name = "comment_id")
     private Long id;
 
-    @Column(name = "commentContents")
+    @Column
     private String commentContents;
 
     @ManyToOne(fetch = FetchType.LAZY)
