@@ -1,5 +1,6 @@
 package com.its.mb.entity;
 
+import com.its.mb.dto.BoardDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -37,4 +38,12 @@ public class BoardEntity extends BaseEntity{
     @OneToMany(mappedBy = "boardEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList = new ArrayList<>();
 
+    public static BoardEntity toBoardSaveEntity(BoardDTO boardDTO, MemberEntity memberEntity){
+        BoardEntity boardEntity = new BoardEntity();
+        boardEntity.setBoardTitle(boardDTO.getBoardTitle());
+        boardEntity.setBoardContents(boardDTO.getBoardContents());
+        boardEntity.setBoardFileName(boardDTO.getBoardFileName());
+        boardEntity.setMemberEntity(memberEntity);
+        return boardEntity;
+    }
 }

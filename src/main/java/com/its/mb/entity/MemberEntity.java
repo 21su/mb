@@ -1,5 +1,6 @@
 package com.its.mb.entity;
 
+import com.its.mb.dto.MemberDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +18,7 @@ public class MemberEntity {
     private Long id;
 
     @Column(length = 50, unique = true)
-    private String memberId;
+    private String memberUserId;
 
     @Column(length = 50, nullable = false)
     private String memberPassword;
@@ -39,4 +40,15 @@ public class MemberEntity {
 
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList = new ArrayList<>();
+
+    public static MemberEntity toMemberSaveEntity(MemberDTO memberDTO){
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setMemberUserId(memberDTO.getMemberId());
+        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
+        memberEntity.setMemberName(memberDTO.getMemberName());
+        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
+        memberEntity.setMemberMobile(memberDTO.getMemberMobile());
+        memberEntity.setMemberProfileName(memberDTO.getMemberProfileName());
+        return memberEntity;
+    }
 }
