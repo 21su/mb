@@ -34,4 +34,13 @@ public class CommentEntity extends BaseEntity{
         commentEntity.setBoardEntity(boardEntity);
         return commentEntity;
     }
+
+    public static CommentEntity toCommentUpdateEntity(CommentDTO commentDTO,MemberEntity memberEntity,BoardEntity boardEntity){
+        CommentEntity commentEntity = new CommentEntity();
+        commentEntity.setId(commentDTO.getId());
+        commentEntity.setCommentContents(commentDTO.getCommentContents());
+        commentEntity.setMemberEntity(memberEntity);
+        commentEntity.setBoardEntity(boardEntity);
+        return commentEntity;
+    }
 }
