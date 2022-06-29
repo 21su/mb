@@ -1,5 +1,6 @@
 package com.its.mb.dto;
 
+import com.its.mb.entity.MemberEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,15 @@ public class MemberDTO {
     private MultipartFile memberProfile;
     private String memberProfileName;
 
+    public static MemberDTO toMemberDTO(MemberEntity memberEntity){
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setId(memberEntity.getId());
+        memberDTO.setMemberId(memberEntity.getMemberId());
+        memberDTO.setMemberPassword(memberEntity.getMemberPassword());
+        memberDTO.setMemberName(memberEntity.getMemberName());
+        memberDTO.setMemberEmail(memberEntity.getMemberEmail());
+        memberDTO.setMemberMobile(memberEntity.getMemberMobile());
+        memberDTO.setMemberProfileName(memberEntity.getMemberProfileName());
+        return memberDTO;
+    }
 }

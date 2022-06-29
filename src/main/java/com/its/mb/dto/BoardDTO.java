@@ -1,5 +1,6 @@
 package com.its.mb.dto;
 
+import com.its.mb.entity.BoardEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,16 @@ public class BoardDTO {
     private String boardFileName;
     private LocalDateTime boardCreatedTime;
 
+
+    public static BoardDTO toBoardDTO(BoardEntity boardEntity){
+        BoardDTO boardDTO = new BoardDTO();
+        boardDTO.setId(boardEntity.getId());
+        boardDTO.setBoardTitle(boardEntity.getBoardTitle());
+        boardDTO.setBoardWriter(boardEntity.getMemberEntity().getMemberId());
+        boardDTO.setBoardContents(boardEntity.getBoardContents());
+        boardDTO.setBoardHits(boardEntity.getBoardHits());
+        boardDTO.setBoardFileName(boardEntity.getBoardFileName());
+        boardDTO.setBoardCreatedTime(boardEntity.getCreatedTime());
+        return boardDTO;
+    }
 }
