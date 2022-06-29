@@ -1,15 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Save</title>
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script th:inline="javascript">
+    const idCheck = () =>{
+      let value = false;
+      const memberId = document.getElementById("memberId").value;
+      const checkMessage = document.getElementById("checkMessage");
+      if(memberId != "") {
+        $.ajax({
+          type: "post",
+          url: "/member/id-check/" + memberId,
+          dataType: "json",
+          async: false,
+          success: function (result) {
+            if (result) {
+              checkMessage.innerHTML = "사용가능한 아이디입니다.";
+              checkMessage.style.color = "green";
+              value = true;
+            } else {
+              checkMessage.innerHTML = "중복된 아이디입니다.";
+              checkMessage.style.color = "red";
+              value = false;
+            }
+          }, error: function () {
+            alert("에러");
+          }
+        })
+      }else{
+        checkMessage.innerHTML = "아이디를 입력해주세요.";
+        checkMessage.style.color = "red";
+        value = false;
+      }
+      return value;
+    }
+    const submitEvent = () =>{
+      let value = idCheck();
+      console.log(value);
+      if(value){
+        saveForm.submit();
+      }
+    }
+  </script>
 </head>
 <body>
-  <form method="post" action="/member/save" enctype="multipart/form-data">
+  <form method="post" action="/member/save" name="saveForm" enctype="multipart/form-data">
     <table>
       <tr>
         <td>아이디: </td>
-        <td><input type="text" name="memberId" placeholder="아이디"></td>
+        <td><input type="text" name="memberId" id="memberId" placeholder="아이디">
+        <input type="button" onclick="idCheck()" value="중복체크">
+        </td>
+      </tr>
+      <tr>
+        <td id="checkMessage" colspan="2"></td>
       </tr>
       <tr>
         <td>비밀번호: </td>
@@ -32,7 +79,7 @@
         <td><input type="file" name="memberProfile"></td>
       </tr>
       <tr>
-        <td><input type="submit" value="회원가입"></td>
+        <td><input type="button" onclick="submitEvent()" value="회원가입"></td>
       </tr>
     </table>
   </form>

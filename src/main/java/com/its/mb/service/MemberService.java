@@ -57,4 +57,14 @@ public class MemberService {
             return null;
         }
     }
+
+    public Boolean findByMemberUserId(String memberId) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberUserId(memberId);
+        System.out.println("optionalMemberEntity = " + optionalMemberEntity);
+        if (optionalMemberEntity.isPresent()){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }
