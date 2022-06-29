@@ -30,4 +30,12 @@ public class MemberDTO {
         memberDTO.setMemberProfileName(memberEntity.getMemberProfileName());
         return memberDTO;
     }
+
+    public MemberDTO(String memberId, String memberPassword, String memberName, String memberEmail, String memberMobile) {
+        this.memberId = memberId;
+        this.memberPassword = memberPassword;
+        this.memberName = memberName;
+        this.memberEmail = memberEmail;
+        this.memberMobile = memberMobile;
+    }
 }
