@@ -6,7 +6,8 @@
 </head>
 <body>
     <h2>메인</h2>
-    <a href="/member/save-form">회원가입</a>
-    <a href="/member/login">로그인</a>
+    <a th:if="${session.memberEmail == null}" href="/member/save-form">회원가입</a>
+    <a th:if="${session.memberEmail == null}"  href="/member/login">로그인</a>
+    <a th:if="${session.memberEmail != null}" href="/member/logout">로그아웃</a>
 </body>
 </html>

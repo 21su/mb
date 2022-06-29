@@ -33,7 +33,7 @@ public class MemberService {
         return id;
     }
     public MemberDTO login(MemberDTO memberDTO){
-        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberUserId(memberDTO.getMemberId());
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
         if(optionalMemberEntity.isPresent()){
             MemberEntity memberEntity = optionalMemberEntity.get();
             MemberDTO loginDTO = MemberDTO.toMemberDTO(memberEntity);
@@ -58,9 +58,8 @@ public class MemberService {
         }
     }
 
-    public Boolean findByMemberUserId(String memberId) {
-        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberUserId(memberId);
-        System.out.println("optionalMemberEntity = " + optionalMemberEntity);
+    public Boolean findByMemberEmail(String memberEmail) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(memberEmail);
         if (optionalMemberEntity.isPresent()){
             return false;
         }else{

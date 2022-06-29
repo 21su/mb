@@ -20,7 +20,7 @@ public class TestClass {
 
     public MemberDTO newMember(int i){
         MemberDTO boardDTO =
-                new MemberDTO("testId"+i,"testPassword"+i,"testName"+i,"testEmail"+i,"testMobile"+i);
+                new MemberDTO("testEmail"+i,"testPassword"+i,"testName"+i,"testMobile"+i);
         return boardDTO;
     }
 
@@ -33,6 +33,6 @@ public class TestClass {
         Long id = memberService.save2(memberDTO);
         MemberDTO resultDTO = memberService.findById(id);
         System.out.println("resultDTO = " + resultDTO);
-        assertThat(memberDTO.getMemberId()).isEqualTo(resultDTO.getMemberId());
+        assertThat(memberDTO.getMemberEmail()).isEqualTo(resultDTO.getMemberEmail());
     }
 }

@@ -21,7 +21,7 @@ public class CommentDTO {
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(commentEntity.getId());
         commentDTO.setBoardId(commentEntity.getBoardEntity().getId());
-        commentDTO.setCommentWriter(commentEntity.getMemberEntity().getMemberUserId());
+        commentDTO.setCommentWriter(commentEntity.getMemberEntity().getMemberEmail());
         commentDTO.setCommentContents(commentEntity.getCommentContents());
         commentDTO.setCommentCreatedDate(commentEntity.getCreatedTime());
         return commentDTO;

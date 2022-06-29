@@ -8,21 +8,21 @@
   <script th:inline="javascript">
     const idCheck = () =>{
       let value = false;
-      const memberId = document.getElementById("memberId").value;
+      const memberEmail = document.getElementById("memberEmail").value;
       const checkMessage = document.getElementById("checkMessage");
-      if(memberId != "") {
+      if(memberEmail != "") {
         $.ajax({
           type: "post",
-          url: "/member/id-check/" + memberId,
+          url: "/member/id-check/" + memberEmail,
           dataType: "json",
           async: false,
           success: function (result) {
             if (result) {
-              checkMessage.innerHTML = "사용가능한 아이디입니다.";
+              checkMessage.innerHTML = "사용가능한 이메일입니다.";
               checkMessage.style.color = "green";
               value = true;
             } else {
-              checkMessage.innerHTML = "중복된 아이디입니다.";
+              checkMessage.innerHTML = "중복된 이메일입니다.";
               checkMessage.style.color = "red";
               value = false;
             }
@@ -31,7 +31,7 @@
           }
         })
       }else{
-        checkMessage.innerHTML = "아이디를 입력해주세요.";
+        checkMessage.innerHTML = "이메일을 입력해주세요.";
         checkMessage.style.color = "red";
         value = false;
       }
@@ -50,9 +50,9 @@
   <form method="post" action="/member/save" name="saveForm" enctype="multipart/form-data">
     <table>
       <tr>
-        <td>아이디: </td>
-        <td><input type="text" name="memberId" id="memberId" placeholder="아이디">
-        <input type="button" onclick="idCheck()" value="중복체크">
+        <td>이메일: </td>
+        <td><input type="text" name="memberEmail" id="memberEmail" placeholder="이메일">
+          <input type="button" onclick="idCheck()" value="중복체크">
         </td>
       </tr>
       <tr>
@@ -65,10 +65,6 @@
       <tr>
         <td>이름: </td>
         <td><input type="text" name="memberName" placeholder="이름"></td>
-      </tr>
-      <tr>
-        <td>이메일: </td>
-        <td><input type="text" name="memberEmail" placeholder="이메일"></td>
       </tr>
       <tr>
         <td>전화번호</td>

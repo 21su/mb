@@ -18,16 +18,13 @@ public class MemberEntity {
     private Long id;
 
     @Column(length = 50, unique = true)
-    private String memberUserId;
+    private String memberEmail;
 
     @Column(length = 50, nullable = false)
     private String memberPassword;
 
     @Column(length = 50, nullable = false)
     private String memberName;
-
-    @Column(length = 50, nullable = false)
-    private String memberEmail;
 
     @Column(length = 50, nullable = false)
     private String memberMobile;
@@ -43,10 +40,9 @@ public class MemberEntity {
 
     public static MemberEntity toMemberSaveEntity(MemberDTO memberDTO){
         MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setMemberUserId(memberDTO.getMemberId());
+        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
         memberEntity.setMemberPassword(memberDTO.getMemberPassword());
         memberEntity.setMemberName(memberDTO.getMemberName());
-        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
         memberEntity.setMemberMobile(memberDTO.getMemberMobile());
         memberEntity.setMemberProfileName(memberDTO.getMemberProfileName());
         return memberEntity;
@@ -55,10 +51,9 @@ public class MemberEntity {
     public static MemberEntity toMemberUpdateEntity(MemberDTO memberDTO){
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setId(memberDTO.getId());
-        memberEntity.setMemberUserId(memberDTO.getMemberId());
+        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
         memberEntity.setMemberPassword(memberDTO.getMemberPassword());
         memberEntity.setMemberName(memberDTO.getMemberName());
-        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
         memberEntity.setMemberMobile(memberDTO.getMemberMobile());
         memberEntity.setMemberProfileName(memberDTO.getMemberProfileName());
         return memberEntity;

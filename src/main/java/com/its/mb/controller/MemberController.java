@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -26,10 +27,26 @@ public class MemberController {
         return "index";
     }
 
-    @PostMapping("/id-check/{memberId}")
-    public @ResponseBody Boolean idCheck(@PathVariable("memberId") String memberId){
-        Boolean result = memberService.findByMemberUserId(memberId);
+    @PostMapping("/id-check/{memberEmail}")
+    public @ResponseBody Boolean idCheck(@PathVariable("memberEmail") String memberEmail){
+        Boolean result = memberService.findByMemberEmail(memberEmail);
         return result;
     }
 
+    @GetMapping("/login")
+    public String loginForm(){
+        return "/memberPages/login";
+    }
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute MemberDTO memberDTO,
+                        HttpSession session){
+        MemberDTO loginDTO = memberService.login(memberDTO);
+        if(loginDTO != null){
+            session.setAttribute("memberId", loginDTO.getId());
+            session.setAttribute("memberEmail", loginDTO.getMemberEmail());
+            return "index";
+        }
+        return "/memberPages/login";
+    }
 }
