@@ -20,11 +20,11 @@ public class MemberService {
         MultipartFile memberProfile = memberDTO.getMemberProfile();
         String memberProfileName = memberProfile.getOriginalFilename();
         memberProfileName = System.currentTimeMillis() + "_" + memberProfileName;
-        String savePath = "D:\\springboot_img" + memberProfileName;
+        memberDTO.setMemberProfileName(memberProfileName);
+        String savePath = "C:\\development_hss\\springboot_img\\" + memberProfileName;
         if (!memberProfile.isEmpty()){
             memberProfile.transferTo((new File(savePath)));
         }
-        memberDTO.setMemberProfileName(memberProfileName);
         Long id = memberRepository.save(MemberEntity.toMemberSaveEntity(memberDTO)).getId();
         return id;
     }
@@ -65,5 +65,18 @@ public class MemberService {
         }else{
             return true;
         }
+    }
+
+    public Long update(MemberDTO memberDTO) throws IOException {
+        MultipartFile memberProfile = memberDTO.getMemberProfile();
+        String memberProfileName = memberProfile.getOriginalFilename();
+        memberProfileName = System.currentTimeMillis() + "_" + memberProfileName;
+        String savePath =  "C:\\development_hss\\springboot_img\\" + memberProfileName;
+        if(!memberProfile.isEmpty()) {
+            memberProfile.transferTo((new File(savePath)));
+        }
+        memberDTO.setMemberProfileName(memberProfileName);
+        Long id = memberRepository.save(MemberEntity.toMemberUpdateEntity(memberDTO)).getId();
+        return id;
     }
 }

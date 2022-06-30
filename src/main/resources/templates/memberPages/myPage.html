@@ -1,0 +1,60 @@
+    <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPage</title>
+    <script th:inline="javascript">
+        const updateForm1 = () =>{
+            const password = [[${memberDTO.memberPassword}]];
+            const resultPassword = document.getElementById("memberPassword").value;
+            if(password == resultPassword){
+                updateForm.submit();
+            }else{
+                alert("비밀번호가 다릅니다.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <form method="post" action="/member/update" name="updateForm" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>회원 관리번호: </td>
+                <td><input type="text" name="id" th:value="${memberDTO.id}" readonly></td>
+            </tr>
+            <tr>
+                <td>이메일: </td>
+                <td><input type="text" name="memberEmail" th:value="${memberDTO.memberEmail}" readonly></td>
+            </tr>
+            <tr>
+                <td>비밀번호 확인: </td>
+                <td><input type="password" name="memberPassword" id="memberPassword" placeholder="비밀번호"></td>
+            </tr>
+            <tr>
+                <td>이름: </td>
+                <td><input type="text" name="memberName" th:value="${memberDTO.memberName}" readonly></td>
+            </tr>
+            <tr>
+                <td>전화번호: </td>
+                <td><input type="text" name="memberMobile" th:value="${memberDTO.memberMobile}"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    프로필 편집: <input type="file" name="memberProfile">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p th:text="${memberDTO.memberProfileName}"></p>
+                    <img th:src="@{|/upload/${memberDTO.memberProfileName}|}" width="100" height="100" alt="">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" onclick="updateForm1()" value="수정">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
