@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${boardDTO.boardTitle}"></title>
+    <script th:inline="javascript">
+        const check = (src) =>{
+            const id = [[${boardDTO.id}]];
+            location.href="/board/" + src + "/" + id;
+        }
+    </script>
 </head>
 <body>
     <p th:text="${boardDTO.boardTitle}"></p>
     <p th:text="${boardDTO.boardWriter}"></p>
-    <p th:text="${boardDTO.boardCreatedTime}"></p>
+    <td th:text="*{#temporals.format(boardDTO.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
     <p th:text="${boardDTO.boardHits}"></p>
     <p th:text="${boardDTO.boardContents}"></p>
-    <p><img th:src="@{|/upload/${boardDTO.boardFileName}|}" width="100" height="100" alt=""></p>
+    <p th:if="${boardDTO.boardFileName.length() != 14}"><img th:src="@{|/upload/${boardDTO.boardFileName}|}" width="100" height="100" alt=""></p>
+    <div>
+        <input th:if="${session.memberEmail == boardDTO.boardWriter}" type="button" onclick="check('update')" value="수정">
+        <input th:if="${session.memberEmail == boardDTO.boardWriter or session.memberEmail == 'admin'}" onclick="check('deleteId')" type="button" value="삭제">
+    </div>
 </body>
 </html>

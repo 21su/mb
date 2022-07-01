@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>글수정</title>
+</head>
+<body>
+<form action="/board/update" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${boardDTO.id}">
+    <p><input type="text" name="boardTitle" th:value="${boardDTO.boardTitle}"></p>
+    <p><input type="text" name="boardWriter" th:value="${boardDTO.boardWriter}" readonly></p>
+    <td th:text="*{#temporals.format(boardDTO.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+    <p><input type="text" name="boardHits" th:value="${boardDTO.boardHits}" readonly></p>
+    <p><input type="text" name="boardContents" th:value="${boardDTO.boardContents}"></p>
+    <p th:if="${boardDTO.boardFileName.length() != 14}"><img th:src="@{|/upload/${boardDTO.boardFileName}|}" width="100" height="100" alt=""></p>
+    <p><input type="file" name="boardFile"></p>
+    <div>
+        <input type="submit" value="수정">
+    </div>
+</form>
+</body>
+</html>

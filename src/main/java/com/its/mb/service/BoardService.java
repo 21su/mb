@@ -96,4 +96,30 @@ public class BoardService {
         boardRepository.boardHits(id);
         System.out.println("2");
     }
+
+    public void deleteId(Long id) {
+        boardRepository.deleteById(id);
+    }
+
+    public Long update(BoardDTO boardDTO) throws IOException {
+        MultipartFile boardFile = boardDTO.getBoardFile();
+        String boardFileName = boardFile.getOriginalFilename();
+        boardFileName = System.currentTimeMillis() + "_" + boardFileName;
+        String savePath = "C:\\development_hss\\springboot_img\\" + boardFileName;
+        if (!boardFile.isEmpty()) {
+            boardFile.transferTo((new File(savePath)));
+        }
+        boardDTO.setBoardFileName(boardFileName);
+
+        Optional<MemberEntity> optionalMemberEntity =
+                memberRepository.findByMemberEmail(boardDTO.getBoardWriter());
+        if (optionalMemberEntity.isPresent()){
+            MemberEntity memberEntity = optionalMemberEntity.get();
+            BoardEntity boardEntity = BoardEntity.toBoardUpdateEntity(boardDTO, memberEntity);
+            Long id = boardRepository.save(boardEntity).getId();
+            return id;
+        }else{
+            return null;
+        }
+    }
 }

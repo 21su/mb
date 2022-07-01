@@ -56,4 +56,24 @@ public class BoardController {
         model.addAttribute("boardDTO", boardDTO);
         return "/boardPages/detail";
     }
+
+    @GetMapping("/deleteId/{id}")
+    public String deleteId(@PathVariable("id") Long id){
+        boardService.deleteId(id);
+        return "redirect:/board";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable("id") Long id,
+                         Model model){
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("boardDTO", boardDTO);
+        return "boardPages/update";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute BoardDTO boardDTO) throws IOException {
+        boardService.update(boardDTO);
+        return "redirect:/board/detail/" + boardDTO.getId();
+    }
 }
