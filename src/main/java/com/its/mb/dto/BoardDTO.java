@@ -21,6 +21,13 @@ public class BoardDTO {
     private String boardFileName;
     private LocalDateTime boardCreatedTime;
 
+    public BoardDTO(Long id, String boardTitle, String memberEmail,int boardHits,LocalDateTime boardCreatedTime) {
+        this.id = id;
+        this.boardTitle = boardTitle;
+        this.boardWriter = memberEmail;
+        this.boardHits = boardHits;
+        this.boardCreatedTime = boardCreatedTime;
+    }
 
     public static BoardDTO toBoardDTO(BoardEntity boardEntity){
         BoardDTO boardDTO = new BoardDTO();

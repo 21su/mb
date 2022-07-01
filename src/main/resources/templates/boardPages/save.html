@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>글쓰기</title>
+</head>
+<body>
+    <h2>글쓰기</h2>
+    <form method="post" action="/board/save" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>제목: </td>
+                <td><input type="text" name="boardTitle" placeholder="제목입력"></td>
+            </tr>
+            <tr>
+                <td>작성자: </td>
+                <td><input type="text" name="boardWriter" th:value="${memberDTO.memberEmail}" readonly></td>
+            </tr>
+            <tr>
+                <td>내용: </td>
+                <td><input type="text" name="boardContents" placeholder="내용"></td>
+            </tr>
+            <tr>
+                <td colspan="2">첨부파일: <input type="file" name="boardFile"></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="글쓰기">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

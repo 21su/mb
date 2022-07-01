@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${boardDTO.boardTitle}"></title>
+</head>
+<body>
+    <p th:text="${boardDTO.boardTitle}"></p>
+    <p th:text="${boardDTO.boardWriter}"></p>
+    <p th:text="${boardDTO.boardCreatedTime}"></p>
+    <p th:text="${boardDTO.boardHits}"></p>
+    <p th:text="${boardDTO.boardContents}"></p>
+    <p><img th:src="@{|/upload/${boardDTO.boardFileName}|}" width="100" height="100" alt=""></p>
+</body>
+</html>
