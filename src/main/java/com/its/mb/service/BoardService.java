@@ -92,9 +92,7 @@ public class BoardService {
 
     @Transactional
     public void updateHits(Long id) {
-        System.out.println("1");
         boardRepository.boardHits(id);
-        System.out.println("2");
     }
 
     public void deleteId(Long id) {
@@ -121,5 +119,14 @@ public class BoardService {
         }else{
             return null;
         }
+    }
+
+    public List<BoardDTO> search(String q) {
+        List<BoardEntity> boardEntityList = boardRepository.findByBoardTitleContainingOrBoardContentsContaining(q,q);
+        List<BoardDTO> boardDTOList = new ArrayList<>();
+        for(BoardEntity boardEntity: boardEntityList){
+            boardDTOList.add(BoardDTO.toBoardDTO(boardEntity));
+        }
+        return boardDTOList;
     }
 }

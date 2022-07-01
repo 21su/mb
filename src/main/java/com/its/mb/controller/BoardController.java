@@ -76,4 +76,14 @@ public class BoardController {
         boardService.update(boardDTO);
         return "redirect:/board/detail/" + boardDTO.getId();
     }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("q") String q, Model model){
+        System.out.println(1);
+        List<BoardDTO> searchList = boardService.search(q);
+        System.out.println(2);
+        model.addAttribute("boardList", searchList);
+        return "boardPages/search";
+
+    }
 }
