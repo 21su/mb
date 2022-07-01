@@ -21,5 +21,28 @@
         <input th:if="${session.memberEmail == boardDTO.boardWriter}" type="button" onclick="check('update')" value="수정">
         <input th:if="${session.memberEmail == boardDTO.boardWriter or session.memberEmail == 'admin'}" onclick="check('deleteId')" type="button" value="삭제">
     </div>
+    <div>
+        <h3>COMMENT</h3>
+        <div th:if="${session.memberEmail != null}">
+        <form action="/comment/save" method="post">
+            <input type="hidden" name="boardId" th:value="${boardDTO.id}">
+            <input type="text" name="commentWriter" th:value="${session.memberEmail}" readonly>
+            <input type="text" name="commentContents" placeholder="댓글입력">
+            <input type="submit" value="댓글작성">
+        </form>
+        </div>
+        <table>
+            <tr>
+                <th>작성자</th>
+                <th>내용</th>
+                <th>작성일</th>
+            </tr>
+            <tr th:each="comment: ${commentList}">
+                <td th:text="${comment.commentWriter}"></td>
+                <td th:text="${comment.commentContents}"></td>
+                <td th:text="*{#temporals.format(comment.commentCreatedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

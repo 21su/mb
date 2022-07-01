@@ -2,8 +2,10 @@ package com.its.mb.controller;
 
 import com.its.mb.common.PagingConst;
 import com.its.mb.dto.BoardDTO;
+import com.its.mb.dto.CommentDTO;
 import com.its.mb.dto.MemberDTO;
 import com.its.mb.service.BoardService;
+import com.its.mb.service.CommentService;
 import com.its.mb.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,7 @@ import java.util.List;
 public class BoardController {
     private final BoardService boardService;
     private final MemberService memberService;
+    private final CommentService commentService;
 
     @GetMapping("/save-form/{id}")
     public String saveForm(@PathVariable("id") Long id,
@@ -51,9 +54,11 @@ public class BoardController {
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable("id") Long id,
                          Model model){
+        List<CommentDTO> commentList = commentService.findAll(id);
         boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("boardDTO", boardDTO);
+        model.addAttribute("commentList", commentList);
         return "/boardPages/detail";
     }
 

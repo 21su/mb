@@ -35,7 +35,7 @@ public class BoardEntity extends BaseEntity{
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
 
-    @OneToMany(mappedBy = "boardEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "boardEntity", cascade = CascadeType.PERSIST, orphanRemoval = false, fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList = new ArrayList<>();
 
     public static BoardEntity toBoardSaveEntity(BoardDTO boardDTO, MemberEntity memberEntity){

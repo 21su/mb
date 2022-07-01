@@ -32,10 +32,10 @@ public class MemberEntity {
     @Column(length = 100)
     private String memberProfileName;
 
-    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.PERSIST, orphanRemoval = false, fetch = FetchType.LAZY)
     private List<BoardEntity> boardEntityList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.PERSIST, orphanRemoval = false, fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList = new ArrayList<>();
 
     public static MemberEntity toMemberSaveEntity(MemberDTO memberDTO){
