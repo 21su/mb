@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원목록</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>회원번호</th>
+            <th>회원이메일</th>
+            <th>회원전화번호</th>
+            <th>삭제</th>
+        </tr>
+        <tr th:each="member: ${memberList}">
+            <td th:text="${member.id}"></td>
+            <td th:text="${member.memberEmail}"></td>
+            <td th:text="${member.memberMobile}"></td>
+            <td><a th:href="@{|/member/delete/${member.id}|}">삭제</a></td>
+        </tr>
+    </table>
+</body>
+</html>

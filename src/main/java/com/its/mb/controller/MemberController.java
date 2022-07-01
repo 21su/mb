@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -69,5 +70,23 @@ public class MemberController {
     public String update(@ModelAttribute MemberDTO memberDTO) throws IOException {
         memberService.update(memberDTO);
         return "redirect:/member/my-page/" + memberDTO.getId();
+    }
+
+    @GetMapping("/admin")
+    public String admin(){
+        return "/memberPages/admin";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String memberDelete(@PathVariable("id") Long id){
+        memberService.deleteId(id);
+        return "redirect:/member/findAll";
+    }
+
+    @GetMapping("/findAll")
+    public String findAll(Model model){
+        List<MemberDTO> memberList = memberService.findAll();
+        model.addAttribute("memberList", memberList);
+        return "/memberPages/findAll";
     }
 }
